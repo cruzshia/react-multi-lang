@@ -12,6 +12,9 @@ import {
     match,
 } from 'react-router-dom';
 
+import MultiLang from '../HOC/MultiLang';
+import { InjectedTranslateProps } from 'react-i18next';
+
 interface PathParams {
     lng: string;
     tab?: string;
@@ -110,28 +113,33 @@ const isActive = (match: match, location: locationParam) => {
     return match !== null || location.pathname === '/';
 }
 
-class Prices extends React.PureComponent<RouteComponentProps> {
+const getMatch = (props: RouteComponentProps) => {
+    return matchPath<PathParams>(props.history.location.pathname, {
+        path: '/:lng/:tab',
+        exact: false,
+        strict: false
+    });
+}
+
+class Prices extends React.PureComponent<RouteComponentProps & InjectedTranslateProps> {
     public render() {
-        const match = matchPath<PathParams>(this.props.history.location.pathname, {
-            path: '/:lng/:tab',
-            exact: false,
-            strict: false
-        });
+        const match = getMatch(this.props);
         const lang = match ? match.params.lng : 'zh-TW';
         const tab = match ? match.params.tab : '';
         const matchLang = Langs.find(langObj => langObj.value === lang);
+        const { t } = this.props;
 
         return (
             <HeaderBlk>
                 <Menu>
                     <MenuItem>
-                        <NavLink to={`/${lang}/prices`} activeStyle={ActiveStyle} isActive={isActive}>PRICES</NavLink>
+                        <NavLink to={`/${lang}/prices`} activeStyle={ActiveStyle} isActive={isActive}>{t('prices')}</NavLink>
                     </MenuItem>
                     <MenuItem>
-                        <NavLink to={`/${lang}/wallet`} activeStyle={ActiveStyle}>WALLET</NavLink>
+                        <NavLink to={`/${lang}/wallet`} activeStyle={ActiveStyle}>{t('wallet')}</NavLink>
                     </MenuItem>
                     <MenuItem>
-                        <NavLink to={`/${lang}/account`} activeStyle={ActiveStyle}>ACCOUNT</NavLink>
+                        <NavLink to={`/${lang}/account`} activeStyle={ActiveStyle}>{t('account')}</NavLink>
                     </MenuItem>
                 </Menu>
                 <LangBlk>
@@ -141,7 +149,7 @@ class Prices extends React.PureComponent<RouteComponentProps> {
                         {
                             Langs.map((lang, idx) => (
                                 <Option key={`lang-${idx}`} 
-                                    to={`/${lang.value}/${tab}`}>
+                                    to={`/${lang.value}/${tab || 'prices'}`}>
                                     {lang.title}
                                 </Option>
                             ))
@@ -153,4 +161,4 @@ class Prices extends React.PureComponent<RouteComponentProps> {
     }
 }
 
-export default withRouter(Prices);
+export default withRouter(MultiLang(Prices));
