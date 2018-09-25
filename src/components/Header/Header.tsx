@@ -1,26 +1,20 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { mainColor } from '../../constants/StyledVariable';
-import { Langs } from '../../constants/LangConfig';
 
 import {
     RouteComponentProps,
     withRouter,
     NavLink,
-    matchPath,
-    match,
+    match
 } from 'react-router-dom';
 
 import * as NAV_ICONS from './NavIcons';
 import LangMenu from '../Common/LangMenu';
+import { getMatch } from '../../utils/routerUtils';
 
 import MultiLang from '../HOC/MultiLang';
 import { InjectedTranslateProps } from 'react-i18next';
-
-interface PathParams {
-    lng: string;
-    tab?: string;
-}
 
 interface locationParam {
     pathname: string;
@@ -79,20 +73,11 @@ const isActive = (match: match, location: locationParam) => {
     return match !== null || location.pathname === '/';
 }
 
-const getMatch = (props: RouteComponentProps) => {
-    return matchPath<PathParams>(props.history.location.pathname, {
-        path: '/:lng/:tab',
-        exact: false,
-        strict: false
-    });
-}
-
 class Prices extends React.PureComponent<RouteComponentProps & InjectedTranslateProps> {
     public render() {
         const match = getMatch(this.props);
         const lang = match ? match.params.lng : 'zh-TW';
         const tab = match ? match.params.tab : '';
-        const matchLang = Langs.find(langObj => langObj.value === lang);
         const { t } = this.props;
 
         return (
@@ -117,7 +102,7 @@ class Prices extends React.PureComponent<RouteComponentProps & InjectedTranslate
                         </NavLink>
                     </MenuItem>
                 </Menu>
-                <LangMenu title={matchLang ? matchLang.title : ''} tab={tab || ''}/>
+                <LangMenu/>
             </HeaderBlk>
         );
     }

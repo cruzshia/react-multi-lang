@@ -7,6 +7,10 @@ a {
     text-decoration: none;
 }
 
+#root {
+    padding-top: 80px;
+}
+
 .x-pr {
     position: relative;
 }

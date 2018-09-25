@@ -1,11 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import {
-    NavLink
+    NavLink,
+    withRouter,
+    RouteComponentProps
 } from 'react-router-dom';
 
 import { Langs } from '../../constants/LangConfig';
 import ArrorImg from '../../images/icon-small-arrow-down.png';
+import { getMatch } from '../../utils/routerUtils';
 
 interface LangStyleParams {
     isRWD?: boolean;
@@ -74,16 +77,19 @@ const Arrow = styled.span`
 `;
 
 interface LangMenuParams {
-    title: string;
-    tab: string;
     isRWD?: boolean;
 }
 
-function LangMenu(props: LangMenuParams) {
-    const { title, tab, isRWD } = props;
+function LangMenu(props: LangMenuParams & RouteComponentProps) {
+    const { isRWD } = props;
+    const match = getMatch(props);
+    const lang = match ? match.params.lng : 'zh-TW';
+    const tab = match ? match.params.tab : '';
+    const matchLang = Langs.find(langObj => langObj.value === lang);
+    
     return (
         <LangBlk isRWD={isRWD}>
-            { title || '繁體中文' }
+            { matchLang ? matchLang.title : '繁體中文' }
             <Arrow/>
             <OptionBlk className='option-blk' isRWD={isRWD}>
                 {
@@ -99,4 +105,4 @@ function LangMenu(props: LangMenuParams) {
     )
 }
 
-export default LangMenu;
+export default withRouter(LangMenu);

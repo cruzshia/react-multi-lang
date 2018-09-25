@@ -2,25 +2,25 @@ import { combineReducers } from 'redux';
 import { ActionType, getType } from 'typesafe-actions';
 import * as actions from '../actions';
 
-export type LangAction = ActionType<typeof actions>;
+export type RateAction = ActionType<typeof actions>;
 
 export type LangState = Readonly<{
-    readonly lang: string;
+    readonly rates: Array<String>;
 }>;
 
 export type State = {
-    readonly lang: string;
+    readonly rates: Array<String>;
 };
 
 export const initialState: State = {
-    lang: 'zh-TW',
+    rates: [],
 };
 
-export default combineReducers<LangState, LangAction>({
-    lang: (state = 'zh-TW', action) => {
+export default combineReducers<LangState, RateAction>({
+    rates: (state = [], action) => {
         switch (action.type) {
-            case getType(actions.setLang):
-                return action.payload.lang || state;
+            case getType(actions.setRate):
+                return action.payload.rates || state;
             default:
                 return state;
         }

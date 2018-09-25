@@ -1,11 +1,14 @@
-import { createStandardAction } from 'typesafe-actions';
+import { createStandardAction, action } from 'typesafe-actions';
 
-const SET_LANG = 'lang/SET';
+export const SET_RATE = 'rates/SET';
+export const GET_RATE = 'rates/GET';
 
-export const setLang = createStandardAction(SET_LANG).map(
-    (payload: { lang: string }) => ({
+export const setRate = createStandardAction(SET_RATE).map(
+    (payload: { rates: Array<String> }) => ({
         payload: {
-            lang: payload.lang
+            rates: payload.rates
         }
     })
 );
+//https://api.coinbase.com/v2/exchange-rates
+export const fetchRate = () => action(GET_RATE);

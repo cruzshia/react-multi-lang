@@ -12,6 +12,7 @@ import { LangRegex } from './constants/LangConfig';
 import store from './store';
 import Header from './components/Header';
 import Prices from './components/Prices';
+import PricesContainer from './container/Prices';
 import ComingSoon from './components/Common/ComingSoon';
 import LangControl from './components/LangControl';
 
@@ -30,6 +31,7 @@ class App extends React.Component {
           <I18nextProvider i18n={i18n}>
             <LangControl>
               <Header />
+              <PricesContainer/>
               <Switch>
                 <Route exact path='/' component={Prices} />
                 <Route exact path={`/:lng(${LangRegex})/prices`} component={Prices} />
@@ -37,7 +39,7 @@ class App extends React.Component {
                 <Route exact path={`/:lng(${LangRegex})/account`} component={ComingSoon} />
                 <Route component={() => <Redirect to='/' />} />
               </Switch>
-              <LangMenu title={''} tab={''} isRWD={true}/>
+              <LangMenu isRWD={true} />
             </LangControl>
           </I18nextProvider>
         </Provider>
