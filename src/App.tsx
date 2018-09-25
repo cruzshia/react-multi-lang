@@ -17,6 +17,7 @@ import LangControl from './components/LangControl';
 
 import i18n from './config/i18n';
 import { I18nextProvider } from 'react-i18next';
+import LangMenu from './components/Common/LangMenu';
 
 import './css/reset.css';
 import './css/common.css';
@@ -36,6 +37,7 @@ class App extends React.Component {
                 <Route exact path={`/:lng(${LangRegex})/account`} component={ComingSoon} />
                 <Route component={() => <Redirect to='/' />} />
               </Switch>
+              <LangMenu title={''} tab={''} isRWD={true}/>
             </LangControl>
           </I18nextProvider>
         </Provider>
