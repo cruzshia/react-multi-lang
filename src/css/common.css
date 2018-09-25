@@ -11,6 +11,21 @@ a {
     padding-top: 80px;
 }
 
+.content-container {
+    text-align: center;
+    max-width: 752px;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .content-container {
+        width: 100%;
+        overflow-x: hidden;
+        min-height: 70vh;
+        padding: 0 16px;
+    }
+}
+
 .x-pr {
     position: relative;
 }

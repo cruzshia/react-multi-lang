@@ -19,15 +19,15 @@ interface IconParams {
     active?: boolean;
 }
 
-const Icon = styled.span<IconParams>`
+const Icon = styled.span`
     display: none;
-    width: ${props => props.width || '30px'};
-    height: ${props => props.height || '30px'};
+    width: ${(props: IconParams) => props.width || '30px'};
+    height: ${(props: IconParams) => props.height || '30px'};
     vertical-align: middle;
-    background: url(${props => props.imgUrl}) no-repeat center;
+    background: url(${(props: IconParams) => props.imgUrl}) no-repeat center;
     background-size: contain;
     &.active {
-        background: url(${props => props.activeUrl}) no-repeat center;
+        background: url(${(props: IconParams) => props.activeUrl}) no-repeat center;
     }
 
     @media (max-width: 768px) {

@@ -108,4 +108,4 @@ class Prices extends React.PureComponent<RouteComponentProps & InjectedTranslate
     }
 }
 
-export default withRouter(MultiLang(Prices));
+export default MultiLang(withRouter(Prices));

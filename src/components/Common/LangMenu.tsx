@@ -14,10 +14,10 @@ interface LangStyleParams {
     isRWD?: boolean;
 }
 
-const LangBlk = styled.span<LangStyleParams>`
+const LangBlk = styled.span`
     position: relative;
-    display: ${props => props.isRWD ? 'none' : 'inline-block'};
-    width: ${props => props.isRWD ? 'auto' : '96px'};
+    display: ${(props: LangStyleParams) => props.isRWD === true ? 'none' : 'inline-block'};
+    width: ${(props: LangStyleParams) => props.isRWD  === true ? 'auto' : '96px'};
     padding: 6px 13px;
     font-size: 12px;
     color: #3A4160;
@@ -40,14 +40,16 @@ const LangBlk = styled.span<LangStyleParams>`
     @media (max-width: 768px) {
         display: ${props => props.isRWD ? 'inline-block' : 'none'}
         border-width: ${props => props.isRWD ? '0' : '1.5px'}
+        margin-left: 50%;
+        transform: translateX(-50%);
     }
 `;
 
-const OptionBlk = styled.div<LangStyleParams>`
+const OptionBlk = styled.div`
     display: block;
-    position: ${props => props.isRWD ? 'relative' : 'absolute'};
-    left: ${props => props.isRWD ? 'auto' : '0'};
-    top: ${props => props.isRWD ? 'auto' : '36px'};
+    position: ${(props: LangStyleParams) => props.isRWD ? 'relative' : 'absolute'};
+    left: ${(props: LangStyleParams) => props.isRWD ? 'auto' : '0'};
+    top: ${(props: LangStyleParams) => props.isRWD ? 'auto' : '34px'};
     width: 96px;
     line-height: 49px;
     transition: 0.1s all;
@@ -56,7 +58,8 @@ const OptionBlk = styled.div<LangStyleParams>`
     border: 1px solid #95B0F3;
     border-radius: 4px;
     text-align: center;
-    margin-top: ${props => props.isRWD ? '10px' : '0'};
+    background: #fff;
+    margin-top: ${(props: LangStyleParams) => props.isRWD ? '10px' : '0'};
 `;
 
 const Option = styled(NavLink)`
@@ -87,7 +90,7 @@ function LangMenu(props: LangMenuParams & RouteComponentProps) {
     const tab = match ? match.params.tab : '';
     const matchLang = Langs.find(langObj => langObj.value === lang);
     
-    return (
+    return isRWD && tab !== 'prices' ? null : (
         <LangBlk isRWD={isRWD}>
             { matchLang ? matchLang.title : '繁體中文' }
             <Arrow/>

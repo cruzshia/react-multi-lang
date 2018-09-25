@@ -1,14 +1,18 @@
-import { createStandardAction, action } from 'typesafe-actions';
+import { action } from 'typesafe-actions';
+
+export interface Payload {
+    rates: Object
+}
+
+export interface Action {
+    type: string;
+    payload?: Payload;
+    params?: {};
+}
 
 export const SET_RATE = 'rates/SET';
-export const GET_RATE = 'rates/GET';
+export const GET_RATE = 'rates/GET'; 
 
-export const setRate = createStandardAction(SET_RATE).map(
-    (payload: { rates: Array<String> }) => ({
-        payload: {
-            rates: payload.rates
-        }
-    })
-);
-//https://api.coinbase.com/v2/exchange-rates
 export const fetchRate = () => action(GET_RATE);
+
+export const fetchRateFulfilled = (payload: Object) => ({ type: SET_RATE, payload });

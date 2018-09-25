@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux';
 
 import { RootState } from '../../store';
-import { setRate, fetchRate } from '../../actions';
+import { fetchRate } from '../../actions';
 
-import { LangState } from '../../reducer';
+import { State } from '../../reducer';
+import Price from '../../components/Prices';
 
 const mapStateToProps = ({ rates }: RootState) => ({
     rates: rates
@@ -13,14 +14,12 @@ const mapStateToProps = ({ rates }: RootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
-        setRate: (rates: Array<string>) => setRate({ rates }),
         fetchRate: () => dispatch(fetchRate())
     }
 };
 
-interface Props extends LangState {
-    setRate: (rates: Array<string>) => any;
-    fetchRate: () => any;
+interface Props extends State {
+    fetchRate: () => void;
 }
 
 class PricesContainer extends React.Component<Props> {
@@ -29,9 +28,11 @@ class PricesContainer extends React.Component<Props> {
     }
     
     public render () {
-        return <div>123</div>
+        const { rates } = this.props;
+        return <Price rates={rates}/>
     }
 }
+
 
 export default connect(
     mapStateToProps, 

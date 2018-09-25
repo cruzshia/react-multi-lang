@@ -1,26 +1,19 @@
 import { combineReducers } from 'redux';
-import { ActionType, getType } from 'typesafe-actions';
 import * as actions from '../actions';
 
-export type RateAction = ActionType<typeof actions>;
-
-export type LangState = Readonly<{
-    readonly rates: Array<String>;
+export type State = Readonly<{
+    readonly rates: Object;
 }>;
 
-export type State = {
-    readonly rates: Array<String>;
-};
-
 export const initialState: State = {
-    rates: [],
+    rates: {}
 };
 
-export default combineReducers<LangState, RateAction>({
-    rates: (state = [], action) => {
+export default combineReducers<State, actions.Action>({
+    rates: (state = [], action: actions.Action) => {
         switch (action.type) {
-            case getType(actions.setRate):
-                return action.payload.rates || state;
+            case actions.SET_RATE:
+                return action.payload ? action.payload.rates : state;
             default:
                 return state;
         }

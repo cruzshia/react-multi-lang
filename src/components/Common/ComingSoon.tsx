@@ -1,17 +1,18 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import { mainColor } from '../../constants/StyledVariable';
+import { mainColor, midScreenSize } from '../../constants/StyledVariable';
 
 const ComingBlk = styled.div`
-    margin-top: 356px;
+    padding-top: 296px;
     font-size: 32px;
     line-height: 35px;
     text-align: center;
     color: ${mainColor};
 
-    @media (max-width: 768px) {
+    @media (max-width: ${midScreenSize}) {
         font-size: 24px;
+        padding-top: 170px;
     }
 `;
 

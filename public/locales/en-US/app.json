@@ -1,5 +1,6 @@
 {
     "prices": "PRICES",
     "wallet": "WALLET",
-    "account": "ACCOUNT"
+    "account": "ACCOUNT",
+    "inputTip": "Input USD Amount"
 }

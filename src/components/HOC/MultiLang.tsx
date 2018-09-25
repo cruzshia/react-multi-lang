@@ -1,10 +1,7 @@
 import * as React from 'react';
 import { translate } from 'react-i18next';
-import {
-    RouteComponentProps,
-} from 'react-router-dom';
 
-const MultiLang = (WrappedComponent: React.ComponentClass<RouteComponentProps>) => {
+const MultiLang = (WrappedComponent: React.ComponentClass) => {
     return translate('app',  {wait: true})(WrappedComponent);
 }
 
