@@ -6,21 +6,15 @@ import * as _ from 'lodash';
 import i18n from '../../config/i18n';
 
 import { midScreenSize } from '../../constants/StyledVariable';
+import Loading from '../Common/Loading';
 
 interface Props {
-    rates: Object
+    rates: Object,
+    loading: boolean
 }
 
 interface State {
     value: string
-}
-
-interface Target {
-    value: string
-}
-
-interface Event {
-    target: Target
 }
 
 const InputBlk = styled.div`
@@ -93,8 +87,8 @@ class Prices extends React.Component<Props, State> {
         }
     }
 
-    onChange = (e: Event) => {
-        let val = e.target ? e.target.value : '';
+    onChange = (e: React.FormEvent<HTMLInputElement>) => {
+        let val = e.currentTarget.value || '';
         if (val) {
             val = val.length > 10 ? val.substring(0, 11) : val;
             let numVal = Number(val);
@@ -124,12 +118,12 @@ class Prices extends React.Component<Props, State> {
     }
 
     public render() {
-        const { rates } = this.props;
-        return (
+        const { rates, loading } = this.props;
+        return loading ? <Loading/> : (
             <div>
                 <InputBlk>
                     <InputBox placeholder={i18n.t('inputTip', {lng: i18n.language, defaultValue: '' })}
-                        type='number' maxLength={9}
+                        type='number'
                         value={this.state.value}
                         onChange={this.onChange}/>
                     <Divider className='divider'/>

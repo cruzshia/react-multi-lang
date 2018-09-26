@@ -31,7 +31,7 @@ class App extends React.Component {
             <LangControl>
               <Header />
               <div className='content-container'>
-                <Switch>
+                <Switch> 
                   <Route exact path='/' component={Prices} />
                   <Route exact path={`/:lng(${LangRegex})/prices`} component={Prices} />
                   <Route exact path={`/:lng(${LangRegex})/wallet`} component={ComingSoon} />

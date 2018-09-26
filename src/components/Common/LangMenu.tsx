@@ -8,7 +8,10 @@ import {
 
 import { Langs } from '../../constants/LangConfig';
 import ArrorImg from '../../images/icon-small-arrow-down.png';
+import EarthImg from '../../images/icon/label/earth.svg';
+
 import { getMatch } from '../../utils/routerUtils';
+import { midScreenSize } from '../../constants/StyledVariable';
 
 interface LangStyleParams {
     isRWD?: boolean;
@@ -25,9 +28,12 @@ const LangBlk = styled.span`
     border: 1.5px solid #95B0F3;
     border-radius: 50px;
     cursor: pointer;
+
     &:hover .option-blk {
         transform: scale(1);
+        height: auto;
     }
+
     &:after {
         content: '';
         position: absolute;
@@ -37,9 +43,9 @@ const LangBlk = styled.span`
         width: 100%;
     }
 
-    @media (max-width: 768px) {
-        display: ${props => props.isRWD ? 'inline-block' : 'none'}
-        border-width: ${props => props.isRWD ? '0' : '1.5px'}
+    @media (max-width: ${midScreenSize}) {
+        display: ${(props: LangStyleParams) => props.isRWD ? 'inline-block' : 'none'}
+        border-width: ${(props: LangStyleParams) => props.isRWD ? '0' : '1.5px'}
         margin-left: 50%;
         transform: translateX(-50%);
     }
@@ -51,6 +57,7 @@ const OptionBlk = styled.div`
     left: ${(props: LangStyleParams) => props.isRWD ? 'auto' : '0'};
     top: ${(props: LangStyleParams) => props.isRWD ? 'auto' : '34px'};
     width: 96px;
+    height: ${(props: LangStyleParams) => props.isRWD ? '0' : 'auto'};
     line-height: 49px;
     transition: 0.1s all;
     transform: scale(0);
@@ -71,11 +78,18 @@ const Option = styled(NavLink)`
     }
 `;
 
-const Arrow = styled.span`
+interface IconParams {
+    width: string;
+    height: string;
+    imgUrl: string;
+}
+
+const Icon = styled.span`
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url(${ArrorImg});
+    width: ${(props: IconParams) => props.width};
+    height: ${(props: IconParams) => props.height};
+    background: url(${(props: IconParams) => props.imgUrl}) no-repeat center;
+    background-size: contain;
     vertical-align: middle;
 `;
 
@@ -90,10 +104,11 @@ function LangMenu(props: LangMenuParams & RouteComponentProps) {
     const tab = match ? match.params.tab : '';
     const matchLang = Langs.find(langObj => langObj.value === lang);
     
-    return isRWD && tab !== 'prices' ? null : (
+    return isRWD && tab && tab !== 'prices' ? null : (
         <LangBlk isRWD={isRWD}>
+            { isRWD ? <Icon width='24px' height='24px' imgUrl={EarthImg}/> : null }
             { matchLang ? matchLang.title : '繁體中文' }
-            <Arrow/>
+            <Icon width='16px' height='16px' imgUrl={ArrorImg}/>
             <OptionBlk className='option-blk' isRWD={isRWD}>
                 {
                     Langs.map((lang) => (

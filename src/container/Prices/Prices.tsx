@@ -8,8 +8,9 @@ import { fetchRate } from '../../actions';
 import { State } from '../../reducer';
 import Price from '../../components/Prices';
 
-const mapStateToProps = ({ rates }: RootState) => ({
-    rates: rates
+const mapStateToProps = ({ rates, loading }: RootState) => ({
+    rates,
+    loading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
@@ -28,8 +29,8 @@ class PricesContainer extends React.Component<Props> {
     }
     
     public render () {
-        const { rates } = this.props;
-        return <Price rates={rates}/>
+        const { rates, loading } = this.props;
+        return <Price rates={rates} loading={loading}/>
     }
 }
 

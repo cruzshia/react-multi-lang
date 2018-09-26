@@ -16,6 +16,8 @@ import { getMatch } from '../../utils/routerUtils';
 import MultiLang from '../HOC/MultiLang';
 import { InjectedTranslateProps } from 'react-i18next';
 
+import { midScreenSize } from '../../constants/StyledVariable';
+
 interface locationParam {
     pathname: string;
 }
@@ -31,7 +33,7 @@ const HeaderBlk = styled.header`
     background: #FFFFFF;
     box-shadow: 0 -4px 16px 0 rgba(0, 0, 0, 0.08);
 
-    @media (max-width: 768px) {
+    @media (max-width: ${midScreenSize}) {
         padding: 16px 0;
         text-align: center;
     }
@@ -39,7 +41,7 @@ const HeaderBlk = styled.header`
 
 const Menu = styled.ul`
     display: inline-block;
-    @media (max-width: 768px) {
+    @media (max-width: ${midScreenSize}) {
         display: block;
     }
 `;
@@ -54,7 +56,7 @@ const MenuItem = styled.li`
         color: ${mainColor};
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: ${midScreenSize}) {
         width: 33.3%;
         margin: 0;
         font-size: 12px;

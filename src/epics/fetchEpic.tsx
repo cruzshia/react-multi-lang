@@ -7,13 +7,14 @@ interface responseObj {
     data: object   
 }
 
-const fetchEpic = (action$: ActionsObservable<Action>) => action$.pipe(
-    ofType(GET_RATE),
-    mergeMap(action =>
-        ajax.getJSON(`https://api.coinbase.com/v2/exchange-rates`).pipe(
-            map((response: responseObj) => fetchRateFulfilled(response.data))
+const fetchEpic = (action$: ActionsObservable<Action>) => 
+    action$.pipe(
+        ofType(GET_RATE),
+        mergeMap(() =>
+            ajax.getJSON(`https://api.coinbase.com/v2/exchange-rates`).pipe(
+                map((response: responseObj) => fetchRateFulfilled(response.data))
+            )
         )
-    )
-);
+    );
 
 export default fetchEpic;

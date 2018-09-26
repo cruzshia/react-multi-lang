@@ -1,15 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import PriceImg from '../../images/icon/navi/prices.png';
-import PriceActiveImg from '../../images/icon/navi/prices_active.png';
+import PriceImg from '../../images/icon/navi/prices.svg';
+import PriceActiveImg from '../../images/icon/navi/prices_active.svg';
 
-import AccountImg from '../../images/icon/navi/account.png';
-import AccountActiveImg from '../../images/icon/navi/account_active.png';
+import AccountImg from '../../images/icon/navi/account.svg';
+import AccountActiveImg from '../../images/icon/navi/account_active.svg';
 
-import WalletImg from '../../images/icon/navi/wallet.png';
-import WalletActiveImg from '../../images/icon/navi/wallet_active.png';
+import WalletImg from '../../images/icon/navi/wallet.svg';
+import WalletActiveImg from '../../images/icon/navi/wallet_active.svg';
 
-import EarthImg from '../../images/icon/label/earth.png';
+import { midScreenSize } from '../../constants/StyledVariable';
 
 interface IconParams {
     width?: string;
@@ -30,7 +30,7 @@ const Icon = styled.span`
         background: url(${(props: IconParams) => props.activeUrl}) no-repeat center;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: ${midScreenSize}) {
         display: block;
         margin: 0 auto 3px;
     }
@@ -39,4 +39,3 @@ const Icon = styled.span`
 export const PriceIcon = (active = false) => <Icon imgUrl={PriceImg} activeUrl={PriceActiveImg} className={active ? 'active' : ''}/>;
 export const AccountIcon = (active = false) => <Icon imgUrl={AccountImg} activeUrl={AccountActiveImg} className={active ? 'active' : ''}/>;
 export const WalletIcon = (active = false) => <Icon imgUrl={WalletImg} activeUrl={WalletActiveImg} className={active ? 'active' : ''}/>;
-export const EarchIcon = (active = false) => <Icon imgUrl={EarthImg} activeUrl={EarthImg} className={active ? 'active' : ''}/>;

@@ -40,7 +40,7 @@ const ICON = styled.span`
     @media (max-width: ${midScreenSize}) {
         width: 48px;
         height: 48px;
-        margin: 0 8px 0 0 ;
+        margin: 0 8px 0 0;
         float: left;
     }
 `;
@@ -72,6 +72,9 @@ const Block = styled.div`
         padding: 16px 0;
         border-radius: 0;
         border-bottom: 1.9px solid #b1bdda;
+        &:last-child {
+            margin-bottom: 27px;
+        }
     }
 `;
 
